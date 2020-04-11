@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.gustavoantunes.service_habitos.model.Objetivo;
+import br.com.gustavoantunes.service_habitos.model.Meta;
 import br.com.gustavoantunes.service_habitos.model.StatusObjetivo;
 
-public class ObjetivoDTO implements Serializable{
+public class MetaDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,21 +20,18 @@ public class ObjetivoDTO implements Serializable{
 	private LocalDate dataInicio;
 	private LocalDate dataConclusao;
 	private StatusObjetivo status;
-	private List<MetaDTO> metas;
+	private List<TarefaDTO> tarefas;
 
-	public ObjetivoDTO(Objetivo objetivo) {
-		this.id = objetivo.getId();
-		this.nome = objetivo.getNome();
-		this.descricao = objetivo.getDescricao();
-		this.dataInicio = objetivo.getDataInicio();
-		this.dataConclusao = objetivo.getDataConclusao();
-		this.dataCriacao = objetivo.getDataCriacao();
-		this.status = objetivo.getStatus();
-		if (objetivo.getMetas() != null)
-			this.metas = objetivo.getMetas().stream().map(MetaDTO::new).collect(Collectors.toList());
-	}
-	
-	public ObjetivoDTO() {
+	public MetaDTO(Meta meta) {
+		this.id = meta.getId();
+		this.nome = meta.getNome();
+		this.descricao = meta.getDescricao();
+		this.dataCriacao = meta.getDataCriacao();
+		this.dataInicio = meta.getDataInicio();
+		this.dataConclusao = meta.getDataConclusao();
+		this.status = meta.getStatus();
+		if (meta.getTarefas() != null)
+			this.tarefas = meta.getTarefas().stream().map(TarefaDTO::new).collect(Collectors.toList());
 	}
 
 	public Long getId() {
@@ -65,12 +62,8 @@ public class ObjetivoDTO implements Serializable{
 		return status;
 	}
 
-	public List<MetaDTO> getMetas() {
-		return metas;
-	}
-
-	public static List<ObjetivoDTO> converter(List<Objetivo> objetivos) {
-		return objetivos.stream().map(ObjetivoDTO::new).collect(Collectors.toList());
+	public List<TarefaDTO> getTarefas() {
+		return tarefas;
 	}
 
 }

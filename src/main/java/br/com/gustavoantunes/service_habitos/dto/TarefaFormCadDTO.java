@@ -1,11 +1,23 @@
 package br.com.gustavoantunes.service_habitos.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-import br.com.gustavoantunes.service_habitos.model.Objetivo;
+import javax.validation.constraints.NotEmpty;
 
-public class ObjetivoFormCadastroDTO {
+import org.hibernate.validator.constraints.Length;
 
+import com.sun.istack.NotNull;
+
+import br.com.gustavoantunes.service_habitos.model.Tarefa;
+
+public class TarefaFormCadDTO implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	@NotNull
+	@NotEmpty
+	@Length(min = 1)
 	private String nome;
 	private String descricao;
 	private LocalDate dataInicio;
@@ -31,9 +43,9 @@ public class ObjetivoFormCadastroDTO {
 	public String getImagem() {
 		return imagem;
 	}
-	
-	public Objetivo converter() {
-		return new Objetivo(nome, descricao, dataInicio, dataConclusao);
-	}
 
+	public Tarefa converter() {
+
+		return new Tarefa(nome, descricao, dataInicio, dataConclusao, imagem);
+	}
 }
