@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 import br.com.gustavoantunes.service_habitos.model.Meta;
 import br.com.gustavoantunes.service_habitos.model.StatusObjetivo;
 
-public class MetaDTO implements Serializable{
+public class MetaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String nome;
 	private String descricao;
@@ -21,6 +21,7 @@ public class MetaDTO implements Serializable{
 	private LocalDate dataConclusao;
 	private StatusObjetivo status;
 	private List<TarefaDTO> tarefas;
+	private Long objetivoId;
 
 	public MetaDTO(Meta meta) {
 		this.id = meta.getId();
@@ -30,6 +31,7 @@ public class MetaDTO implements Serializable{
 		this.dataInicio = meta.getDataInicio();
 		this.dataConclusao = meta.getDataConclusao();
 		this.status = meta.getStatus();
+		this.objetivoId = meta.getObjetivo().getId();
 		if (meta.getTarefas() != null)
 			this.tarefas = meta.getTarefas().stream().map(TarefaDTO::new).collect(Collectors.toList());
 	}
@@ -64,6 +66,10 @@ public class MetaDTO implements Serializable{
 
 	public List<TarefaDTO> getTarefas() {
 		return tarefas;
+	}
+
+	public Long getObjetivoId() {
+		return objetivoId;
 	}
 
 }

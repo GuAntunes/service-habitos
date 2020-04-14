@@ -14,10 +14,10 @@ import com.sun.istack.NotNull;
 
 import br.com.gustavoantunes.service_habitos.model.Meta;
 
-public class MetaFormCadDTO implements Serializable{
+public class MetaFormCadDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@NotNull
 	@NotEmpty
 	@Length(min = 1)
@@ -28,6 +28,7 @@ public class MetaFormCadDTO implements Serializable{
 	private String imagem;
 	@Valid
 	private List<TarefaFormCadDTO> tarefas;
+	private Long objetivoId;
 
 	public String getNome() {
 		return nome;
@@ -51,6 +52,10 @@ public class MetaFormCadDTO implements Serializable{
 
 	public List<TarefaFormCadDTO> getTarefas() {
 		return tarefas;
+	}
+
+	public Long getObjetivoId() {
+		return objetivoId;
 	}
 
 	public Meta converter() {
