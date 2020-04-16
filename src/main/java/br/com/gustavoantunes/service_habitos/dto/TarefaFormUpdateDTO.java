@@ -10,8 +10,9 @@ import org.hibernate.validator.constraints.Length;
 import com.sun.istack.NotNull;
 
 import br.com.gustavoantunes.service_habitos.model.Tarefa;
+import br.com.gustavoantunes.service_habitos.repository.TarefaRepository;
 
-public class TarefaFormCadDTO implements Serializable {
+public class TarefaFormUpdateDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -49,8 +50,16 @@ public class TarefaFormCadDTO implements Serializable {
 		return metaId;
 	}
 
-	public Tarefa converter() {
+	public Tarefa atualizar(Long id, TarefaRepository tarefaRepository) {
+		Tarefa tarefa = tarefaRepository.getOne(id);
 
-		return new Tarefa(nome, descricao, dataInicio, dataConclusao, imagem);
+		tarefa.setNome(nome);
+		tarefa.setDescricao(descricao);
+		tarefa.setDataInicio(dataInicio);
+		tarefa.setDataConclusao(dataConclusao);
+		tarefa.setImagem(imagem);
+
+		return tarefa;
 	}
+
 }

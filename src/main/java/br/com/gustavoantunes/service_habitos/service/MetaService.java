@@ -31,8 +31,8 @@ public class MetaService {
 
 	public Meta findById(Long id) {
 
-		Optional<Meta> objetivo = metaRepository.findById(id);
-		return objetivo.orElseThrow(() -> new ObjectNotFoundException(
+		Optional<Meta> meta = metaRepository.findById(id);
+		return meta.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Meta.class.getName()));
 	}
 
@@ -45,10 +45,6 @@ public class MetaService {
 					"Objeto não encontrado! Id: " + id + ", Tipo: " + Meta.class.getName());
 		}
 	}
-
-//	public Page<Objetivo> findAll(Pageable paginacao) {
-//		return objetivoRepository.findAll(paginacao);
-//	}
 
 	public Meta update(Long id, MetaFormUpdateDTO form) {
 		Optional<Meta> optional = metaRepository.findById(id);

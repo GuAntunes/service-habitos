@@ -10,7 +10,7 @@ import br.com.gustavoantunes.service_habitos.model.Tarefa;
 public class TarefaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private String nome;
 	private String descricao;
@@ -18,6 +18,7 @@ public class TarefaDTO implements Serializable {
 	private LocalDate dataInicio;
 	private LocalDate dataConclusao;
 	private StatusObjetivo status;
+	private Long metaId;
 
 	public TarefaDTO(Tarefa tarefa) {
 		this.id = tarefa.getId();
@@ -27,6 +28,7 @@ public class TarefaDTO implements Serializable {
 		this.dataInicio = tarefa.getDataInicio();
 		this.dataConclusao = tarefa.getDataConclusao();
 		this.status = tarefa.getStatus();
+		this.metaId = tarefa.getMeta().getId();
 	}
 
 	public Long getId() {
@@ -55,6 +57,10 @@ public class TarefaDTO implements Serializable {
 
 	public StatusObjetivo getStatus() {
 		return status;
+	}
+
+	public Long getMetaId() {
+		return metaId;
 	}
 
 }

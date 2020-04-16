@@ -17,50 +17,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.gustavoantunes.service_habitos.dto.MetaDTO;
-import br.com.gustavoantunes.service_habitos.dto.MetaFormCadDTO;
-import br.com.gustavoantunes.service_habitos.dto.MetaFormUpdateDTO;
-import br.com.gustavoantunes.service_habitos.model.Meta;
-import br.com.gustavoantunes.service_habitos.service.MetaService;
+import br.com.gustavoantunes.service_habitos.dto.TarefaDTO;
+import br.com.gustavoantunes.service_habitos.dto.TarefaFormCadDTO;
+import br.com.gustavoantunes.service_habitos.dto.TarefaFormUpdateDTO;
+import br.com.gustavoantunes.service_habitos.model.Tarefa;
+import br.com.gustavoantunes.service_habitos.service.TarefaService;
 
 //TO-DO: Implementar o Cache para otimizar as requisições
 
 @RestController
-@RequestMapping(value = "/meta")
-public class MetaResource {
+@RequestMapping(value = "/tarefa")
+public class TarefaResource {
 
 	@Autowired
-	private MetaService metaService;
+	private TarefaService tarefaService;
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<MetaDTO> cadastrar(@RequestBody @Valid MetaFormCadDTO metaForm,
+	public ResponseEntity<TarefaDTO> cadastrar(@RequestBody @Valid TarefaFormCadDTO metaForm,
 			UriComponentsBuilder uriBuilder) {
 
-		Meta meta = metaService.save(metaForm);
+		Tarefa tarefa = tarefaService.save(metaForm);
 
-		URI uri = uriBuilder.path("/objetivo/{id}").buildAndExpand(meta.getObjetivo().getId()).toUri();
-		return ResponseEntity.created(uri).body(new MetaDTO(meta));
+		URI uri = uriBuilder.path("/meta/{id}").buildAndExpand(tarefa.getMeta().getId()).toUri();
+		return ResponseEntity.created(uri).body(new TarefaDTO(tarefa));
 	}
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<MetaDTO> atualizar(@PathVariable Long id, @RequestBody MetaFormUpdateDTO form) {
+	public ResponseEntity<TarefaDTO> atualizar(@PathVariable Long id, @RequestBody TarefaFormUpdateDTO form) {
 
-		Meta meta = metaService.update(id, form);
-		return ResponseEntity.ok(new MetaDTO(meta));
+		Tarefa tarefa = tarefaService.update(id, form);
+		return ResponseEntity.ok(new TarefaDTO(tarefa));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<MetaDTO> detalhar(@PathVariable Long id) {
-		Meta meta = metaService.findById(id);
-		return ResponseEntity.ok(new MetaDTO(meta));
+	public ResponseEntity<TarefaDTO> detalhar(@PathVariable Long id) {
+		Tarefa tarefa = tarefaService.findById(id);
+		return ResponseEntity.ok(new TarefaDTO(tarefa));
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
-		metaService.deleteById(id);
+		tarefaService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 
