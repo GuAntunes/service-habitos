@@ -15,9 +15,9 @@
 	<name>service-habitos</name>
 	<description>Microserviços de Hábitos</description>
 
-	<properties>
-		<java.version>14</java.version>
-	</properties>
+<!-- 	<properties> -->
+<!-- 		<java.version>14</java.version> -->
+<!-- 	</properties> -->
 
 	<dependencies>
 		<dependency>
@@ -79,15 +79,6 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -106,4 +97,12 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+		<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
